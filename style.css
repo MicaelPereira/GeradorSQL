@@ -1,0 +1,70 @@
+body{
+    width: 100%;
+    margin: auto;
+    background-color: darkslategrey;
+}
+
+header{
+    width: 1200px;
+    margin-left: 50px;
+}
+
+.container{
+    text-align: center;
+    width: 1000px;
+}
+
+textarea{
+    color: white;
+    border-radius: 1.2%;
+}
+
+textarea.p{
+    float: left;
+}
+
+h4{
+    font-size: 50px;
+    color: white;
+    text-align: center;
+}
+
+#bkp{
+    width: 500px;
+    height: 150px;
+    color: white;
+}
+
+#execucao{
+    width: 500px;
+    color: white;
+    margin-top: 50px;
+}
+
+#btn-gerar{
+    margin-top: 20px;
+}
+
+#rollback{
+    color: white;
+    width: 500px;
+    height: 150px;
+}
+
+footer{
+    width: 100%;
+    margin: auto;
+    height: 50px;
+    background-color: #4caf50;
+}
+
+.rodape{
+    color: white;
+    height: 50px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.rodape p{
+    padding-top: 10px;
+}
