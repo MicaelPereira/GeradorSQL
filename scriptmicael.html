@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Gerador SQL</h1>
+
+<textarea id=text></textarea>
+<button onclick="myFunction()">Click me</button>
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+	//var text = 'update REM_PlanosDeDespesa set IDTipoPlano = 3, Status=2 where id=14866'
+	var text = document.getElementById('text');
+	var word = text.split(" ")
+    console.log('x');
+    for(x=0; x < text.substring(text.indexOf('set') + 3, text.indexOf('where')).split('=').length; x++){
+		console.log(x);    
+		if(x % 2 != 0){
+        	var coluna = text.substring(text.indexOf('set') + 3, text.indexOf('where')).split('=')[x - 1];
+        	console.log(coluna);
+            document.getElementById("demo").innerHTML = coluna;
+    	}
+	}
+  
+}
+</script>
+
+</body>
+</html>

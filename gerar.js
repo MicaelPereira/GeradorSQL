@@ -35,8 +35,8 @@ into backup_${resposta[1]}_${anocompleto}
 from ${resposta[1]}`
         
         //Rollback UPDATE
-        rollback.innerHTML = `${resposta[0]} ${resposta[1]}
-${resposta[2]}
+        rollback.innerHTML = `UPDATE ${resposta[1]}
+set
 ${resposta[1]}.${resposta[3]}=bkp.${resposta[3]}
 from ${resposta[1]}
 JOIN backup_${resposta[1]}_${anocompleto} as bkp 
