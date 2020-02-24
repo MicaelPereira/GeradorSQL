@@ -6,30 +6,64 @@
 
 <p>update REM_PlanosDeDespesa set IDTipoPlano = 3, Status=2 where id=14866</p>
 
-<button onclick="myFunction()">Click me</button>
+<div id="backup">
+	<textarea id="bkp"></textarea>
+</div>
 
-<p id="demo"></p>
+
+<input type="text" id="text" placeholder="Insira sua Query aqui: ">
+<button onclick="myFunction()">Gerar</button>
+
+<div id="rollback">
+	<textarea id="roll"></textarea>
+</div>
 
 <script>
 function myFunction() {
-	var text = 'update REM_PlanosDeDespesa set IDTipoPlano = 3, Status=2 where id=14866';
-  var colunasDoUpdate = '';
-  	for(i=0; i < text.substring(text.indexOf('set') + 3, text.indexOf('where')).split(',').length; i++){
-      var linha = text.substring(text.indexOf('set') + 3, text.indexOf('where')).split(',')[i];
-      console.log('linha ' + i + ' ' + linha)
-      for(x=0; x < linha.split('=').length; x++){
-      var coluna = linha.split('=')[x];
-      
-      if(x % 2 == 0){
-            colunasDoUpdate += coluna;
-            
-            console.log(coluna);
-        }
+	var text = "update REM_PlanosDeDespesa set IDTipoPlano = 3, Status=2 where id=14866";
+		var colunasDoUpdate = '';
+			for(i=0; i < text.substring(text.indexOf('set') + 3, text.indexOf('where')).split(',').length; i++){
+			var linha = text.substring(text.indexOf('set') + 3, text.indexOf('where')).split(',')[i];
+			console.log('linha ' + i + ' ' + linha)
+			for(x=0; x < linha.split('=').length; x++){
+			var coluna = linha.split('=')[x];
+			
+			if(x % 2 == 0){
+					colunasDoUpdate += coluna;
+					
+					console.log(coluna);
+				}
+			}
+		}
+	
+	// Separando as Colunas do UPDATE 
+	var colunas = colunasDoUpdate;
+	var todasAsColunas = colunas.split(" ")
+	
+	// Pegando a linha completa
+	var inicio = text.split(" ");
+	
+	//Campos Backup e Rollback
+    let bkp = document.getElementById('bkp')
+    let rollback = document.getElementById('roll')
+    data = new Date();
+    var ano = data.getFullYear()
+    var mes = data.getMonth()+1
+    var dia = data.getDate()
+    
+    if(mes < 10){
+        mes = `0${mes}`
     }
-  }
-  document.getElementById("demo").innerHTML = colunasDoUpdate;
-  
+
+	var anocompleto = `${ano}${mes}${dia}`
+
+	//Lógica
+    if(inicio[0] != "Insert" && inicio[0] != "insert" && inicio[0] != "INSERT" && inicio[0] != "Update" && inicio[0] != "update" && inicio[0] != "UPDATE" && inicio[0] != "Delete" && inicio[0] != "delete" && inicio[0] != "DELETE"){
+        window.alert("Insira uma query correta!")
+    
+
 }
+
 </script>
 
 </body>
