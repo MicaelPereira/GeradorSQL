@@ -1,26 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="materialize/css/materialize.min.css">
+	<title>Gerador de Backup e Rollback - SQL Server</title>
+</head>
 <body>
 
-<h1>O click vai gerar colunas da query abaixo</h1>
-
-<p>update REM_PlanosDeDespesa set IDTipoPlano = 3, Status=2 where id=14866</p>
+<h1>Gerador de Backup e Rollback - SQL Server</h1>
 
 <div id="backup">
 	<textarea id="bkp"></textarea>
-</div>
+</div><br>
 
 
-<input type="text" id="text" placeholder="Insira sua Query aqui: ">
-<button onclick="myFunction()">Gerar</button>
+<input type="text" id="text" placeholder="Insira sua Query aqui: "> <br><br>
+<button onclick="myFunction()">Gerar</button> <br>
 
+<br>
 <div id="rollback">
 	<textarea id="roll"></textarea>
 </div>
 
 <script>
 function myFunction() {
-	var text = "update REM_PlanosDeDespesa set IDTipoPlano = 3, Status=2 where id=14866";
+	var text = document.getElementById('text').value
 		var colunasDoUpdate = '';
 			for(i=0; i < text.substring(text.indexOf('set') + 3, text.indexOf('where')).split(',').length; i++){
 			var linha = text.substring(text.indexOf('set') + 3, text.indexOf('where')).split(',')[i];
@@ -42,6 +46,7 @@ function myFunction() {
 	
 	// Pegando a linha completa
 	var inicio = text.split(" ");
+	document.getElementById('roll').innerHTML = inicio
 	
 	//Campos Backup e Rollback
     let bkp = document.getElementById('bkp')
@@ -59,9 +64,43 @@ function myFunction() {
 
 	//Lógica
     if(inicio[0] != "Insert" && inicio[0] != "insert" && inicio[0] != "INSERT" && inicio[0] != "Update" && inicio[0] != "update" && inicio[0] != "UPDATE" && inicio[0] != "Delete" && inicio[0] != "delete" && inicio[0] != "DELETE"){
-        window.alert("Insira uma query correta!")
-    
-
+		window.alert("Insira uma query correta!")
+	}else if(inicio[0] == 'Update' || inicio[0] == "update" || inicio[0] == "UPDATE"){
+		//Backup UPDATE
+        bkp.innerHTML = `select
+*
+into backup_${inicio[1]}_${anocompleto}
+from ${inicio[1]}`
+		//Rollback UPDATE
+		roll.innerHTML = `UPDATE ${inicio[1]}
+set
+${inicio[1]}.${todasAsColunas[1]}=bkp.${todasAsColunas[1]}
+from ${inicio[1]}
+JOIN backup_${inicio[1]}_${anocompleto} as bkp 
+on bkp.ID=ID.${inicio[1]}`
+	
+	}else if (inicio[0] == "INSERT" || inicio[0] == "insert" || inicio[0] == "Insert"){
+		//Backup Insert
+        bkp.innerHTML = `select
+*
+into backup_${inicio[3]}_${anocompleto}
+from ${inicio[3]}`
+		
+		//Rollback INSERT
+        roll.innerHTML = `DELETE from ${inicio[2]} where ${inicio[2]}.ID not in (select ID from backup_${inicio[2]}_${anocompleto})`
+		
+	}else if (inicio[0] == "DELETE" || inicio[0] == "delete" || inicio[0] == "Delete"){
+		//Backup DELETE
+        bkp.innerHTML = `select
+*
+into backup_${inicio[3]}_${anocompleto}
+from ${inicio[3]}`
+	
+		//ROLLBACK DELETE
+		roll.innerHTML = `INSERT INTO ${inicio[2]} WHERE ID.backup_${inicio[2]}_${anocompleto} NOT IN (SELECT ID FROM ${inicio[2]})`
+	}
+	else{
+	window.alert = 'Ocorreu um erro na sua consulta!'
 }
 
 </script>
