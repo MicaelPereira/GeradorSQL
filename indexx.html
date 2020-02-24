@@ -2,20 +2,18 @@
 <html lang="pt-BR">
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="materialize/css/materialize.min.css">
 	<title>Gerador de Backup e Rollback - SQL Server</title>
 </head>
 <body>
 
-<h1>Gerador de Backup e Rollback - SQL Server</h1>
+	<h1>Gerador de Backup e Rollback - SQL Server</h1>
 
-<div id="backup">
-	<textarea id="bkp"></textarea>
-</div><br>
+	<div id="backup">
+		<textarea id="bkp"></textarea>
+	</div><br>
 
-
-<input type="text" id="text" placeholder="Insira sua Query aqui: "> <br><br>
-<button onclick="myFunction()">Gerar</button> <br>
+	<input type="text" id="text" placeholder="Insira sua Query aqui: "> <br><br>
+	<button onclick="myFunction()">Gerar</button> <br>
 
 <br>
 <div id="rollback">
@@ -75,7 +73,15 @@ from ${inicio[1]}`
 		roll.innerHTML = `UPDATE ${inicio[1]}
 set
 ${inicio[1]}.${todasAsColunas[1]}=bkp.${todasAsColunas[1]}
-from ${inicio[1]}
+` 
+if (todasAsColunas[3] != ","){
+inicio[1].todasAsColunas[3] + "=bkp."+todasAsColunas[3]	
+} 
+if (todasAsColunas[5] != ","){
+	inicio[1].todasAsColunas[5] + "=bkp."+todasAsColunas[5]
+}
+
+`from ${inicio[1]}
 JOIN backup_${inicio[1]}_${anocompleto} as bkp 
 on bkp.ID=ID.${inicio[1]}`
 	
@@ -101,9 +107,15 @@ from ${inicio[3]}`
 	}
 	else{
 	window.alert = 'Ocorreu um erro na sua consulta!'
+	}
 }
-
 </script>
+
+<footer id="footer">
+        <div class="rodape">
+        <p>&copy;Gerador de Backup e Rollback SQL Server - Reserve Systems</p>
+    </div>
+    </footer>
 
 </body>
 </html>
