@@ -1,7 +1,7 @@
 body{
     width: 100%;
     margin: auto;
-    background-color: darkslategrey;
+    background-color: black;
 }
 
 header{
@@ -48,14 +48,14 @@ h4{
 #rollback{
     color: white;
     width: 500px;
-    height: 150px;
+    height: 200px;
 }
 
 footer{
     width: 100%;
     margin: auto;
     height: 50px;
-    background-color: #4caf50;
+    background-color: #2196f3;
 }
 
 .rodape{
