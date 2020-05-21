@@ -1,7 +1,7 @@
 function executar() {
 
     //Querys Testes
-    //update tabela set status=2, casa=3, bloco=2 where id=3
+    //update tabela set status=2, casa=3, bloco=2 where id=3 and ap=505
     //insert into tabela (nome, sobrenome) values ('carlos', 'tenorio')
     //delete from tabela where id=1
 
@@ -28,15 +28,16 @@ function executar() {
     
     if(lineComplet[0] === "Update" || lineComplet[0] === "update" || lineComplet[0] === "UPDATE"){
 
-        bkp.innerHTML = `SELECT \n * \n INTO \n ${lineComplet[1]}_backup_${anocompleto} bkp \n FROM \n ${lineComplet[1]}`
-        rollback.innerHTML = `UPDATE \n ${lineComplet[1]} \n SET \n`
+        bkp.innerHTML = `SELECT \n * \n INTO \n backup_${lineComplet[1]}_${anocompleto} \n FROM \n ${lineComplet[1]}`
+        rollback.innerHTML = `UPDATE \n${lineComplet[1]} \nSET \n`
 
 
         for(i=0; i < text.substring(text.indexOf('set') + 3, text.indexOf('where')).split(',').length; i++){
-			var linha = text.substring(text.indexOf('set') + 3, text.indexOf('where')).split(',')[i];
+            var linha = text.substring(text.indexOf('set') + 3, text.indexOf('where')).split(',')[i];
 			    console.log('linha ' + i + ' ' + linha)
+        
         for(x=0; x < linha.split('=').length; x++){
-			var coluna = linha.split('=')[x];
+			var coluna = linha.split('=')[x]
             
             if(x % 2 == 0){
 
@@ -47,6 +48,18 @@ function executar() {
             }
         }
 
+        rollback.innerHTML += `FROM ${lineComplet[1]} T \nINNER JOIN backup_${lineComplet[1]}_${anocompleto} bkp \nON T.ID = bkp.ID \nWHERE\n `
+
+        for(y=0; y < text.substring(text.indexOf('where')+5).split('and').length; y++ ){
+            var linha2 = text.substring(text.indexOf('where')+5).split('and')[y];
+            
+            console.log('linha2 ' + y + ' ' + linha2)
+
+                    rollback.innerHTML +=`T.${linha2}`
+                    console.log(linha2);
+                
+            }
+        
     }else if(lineComplet[0] === "Insert" || lineComplet[0] === "insert" || lineComplet[0] === "INSERT"){
 
         bkp.innerHTML = `SELECT \n * \n INTO \n backup_${lineComplet[2]}_${anocompleto} \n FROM \n ${lineComplet[2]}`
