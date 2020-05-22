@@ -31,12 +31,16 @@ h4{
 #bkp{
     width: 500px;
     height: 150px;
+    background-color: black;
     color: white;
+    border-radius: 8px;
 }
 
 #execucao{
     width: 500px;
     color: white;
+    background-color: black;
+    border-radius: 8px;
     margin-top: 50px;
 }
 
@@ -48,6 +52,8 @@ h4{
     color: white;
     width: 500px;
     height: 200px;
+    background-color: black;
+    border-radius: 8px;
 }
 
 footer{

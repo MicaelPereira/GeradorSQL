@@ -41,7 +41,7 @@ function executar() {
             
             if(x % 2 == 0){
 
-                    rollback.innerHTML += `${coluna} = ${coluna}.bkp \n`;
+                    rollback.innerHTML += `${coluna} = ${coluna}.bkp, \n`;
                     console.log(coluna);
                 }
                 
@@ -55,7 +55,7 @@ function executar() {
             
             console.log('linha2 ' + y + ' ' + linha2)
 
-                    rollback.innerHTML +=`T.${linha2}`
+                    rollback.innerHTML +=`T.${linha2} AND `
                     console.log(linha2);
                 
             }
@@ -64,7 +64,7 @@ function executar() {
 
         bkp.innerHTML = `SELECT \n * \n INTO \n backup_${lineComplet[2]}_${anocompleto} \n FROM \n ${lineComplet[2]}`
 
-        rollback.innerHTML = `DELETE FROM ${lineComplet[2]} WHERE ${lineComplet[2]}.ID NOT IN (SELECT ID FROM backup_${lineComplet[2]}_${anocompleto}`
+        rollback.innerHTML = `DELETE FROM ${lineComplet[2]} \nWHERE ${lineComplet[2]}.ID NOT IN\n(SELECT ID FROM backup_${lineComplet[2]}_${anocompleto})`
 
     }else if(lineComplet[0] === "delete" || lineComplet[0] === "Delete" || lineComplet[0] === "DELETE"){
 
