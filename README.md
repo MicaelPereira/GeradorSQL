@@ -1,4 +1,4 @@
-# GitGeradorSQL
+# GeradorSQL
 Gerador de Backup e Rollback SQLServer
 
 Este projeto foi criado com o intuito de facilitar no cotidiano de profissionais que realizam alterações no banco de dados SQL Server.
