@@ -6,7 +6,7 @@ body{
 
 header{
     width: 100%;
-    margin-top: -25px;
+    margin-top: -42px;
     height: 60px;
     background-color: #0000008a;
 }
@@ -25,8 +25,7 @@ textarea.p{
     float: left;
 }
 
-h4{
-    font-size: 50px;
+h1{
     padding-top: 10px;
     color: white;
     text-align: center;
