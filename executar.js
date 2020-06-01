@@ -17,6 +17,10 @@ function executar() {
     var ano = data.getFullYear()
     var mes = data.getMonth()+1
     var dia = data.getDate()
+
+    if(dia < 10){
+        dia = `0${dia}`
+    }
     
     if(mes < 10){
         mes = `0${mes}`
