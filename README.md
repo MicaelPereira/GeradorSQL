@@ -1,7 +1,7 @@
 # GeradorSQL
 Gerador de Backup e Rollback SQLServer
 
-Este projeto foi criado com o intuito de facilitar no cotidiano de profissionais que realizam alterações no banco de dados SQL Server.
+Este projeto foi criado com o intuito de facilitar o cotidiano de profissionais que realizam alterações no banco de dados SQL Server.
 
 Com o gerador, você escreve somente a query que você irá executar e ele cria o backup e rollback.
 
