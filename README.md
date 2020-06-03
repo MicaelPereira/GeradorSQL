@@ -5,7 +5,7 @@ Este projeto foi criado com o intuito de facilitar o cotidiano de profissionais 
 
 Com o gerador, você escreve somente a query que será executada, e o gerador cria o backup e rollback da sua query.
 
-Para utilizar, acesse:http://geradorsqlserver.tk/ ou siga as instruções abaixo:
+Para utilizar, acesse: http://geradorsqlserver.tk/ ou siga as instruções abaixo:
 
 1- Clonar ou realizar o Download do Projeto
 
